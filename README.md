@@ -2,7 +2,7 @@
 An automated 24/7 online knowledge retrieval chatbot assistant engineered for the Students Industrial Training Department (JLIP), Centre of Career Advancement and Alumni (PKKA), Universiti Tun Hussein Onn Malaysia (UTHM).
 
 ## 🚀 Live Application
-Access the production environment here: [JLIP Assistant Live Deployment](https://jlip-li-chatbot-xciv4vrrjdjez2hzw42gz3.streamlit.app/)
+Access the production environment here: [Open Live Chatbot](https://jlip-li-chatbot-xciv4vrrjdjez2hzw42gz3.streamlit.app/)
 
 ---
 
