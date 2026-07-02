@@ -21,7 +21,7 @@ st.set_page_config(
 # Initialize Google GenAI Client
 client = genai.Client(api_key=api_key)
 
-# --- 2. CUSTOM CSS & TEMA KORPORAT UTHM (JLIP) ---
+# --- 2. CUSTOM CSS ---
 custom_css = """
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -84,7 +84,7 @@ custom_css = """
 """
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# --- 3. FUNGSI MELUKIS BUIH SEMBANG (CHAT BUBBLES) ---
+# --- 3. CHAT BUBBLES ---
 def paparkan_mesej(peranan, teks, masa):
     if peranan == "user":
         html = f"""
@@ -99,7 +99,7 @@ def paparkan_mesej(peranan, teks, masa):
         </div>
         """
     else:
-        # ICON ROBOT DIKEMASKINI: Menggunakan fa-robot dengan warna pilihan rgb(2, 45, 78)
+        # ICON ROBOT 
         html = f"""
         <div style='display: flex; justify-content: flex-start; margin-bottom: 20px; align-items: flex-start;'>
             <div style='margin-right: 10px; background-color: var(--secondary-background-color); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.15); border: 2px solid #002147;'>
@@ -127,9 +127,9 @@ def load_vector_store():
 
 db = load_vector_store()
 
-# --- 5. SIDEBAR (MENU TEPI KORPORAT) ---
+# --- 5. SIDEBAR  ---
 with st.sidebar:
-    # Memasukkan Logo UTHM di bahagian paling atas sidebar
+    # Logo UTHM di bahagian paling atas sidebar
     logo_url = "https://www.uthm.edu.my/en/downloads/uthm-official-logo/26-logo-rasmi-uthm/file"
     
     col_logo1, col_logo2, col_logo3 = st.columns([1, 5, 1])
@@ -137,14 +137,12 @@ with st.sidebar:
         # Ditambah margin_bottom pada HTML/CSS utama atau menggunakan div spacer di bawah
         st.image(logo_url, use_container_width=True)
         
-    # --- PENGEMASAN JARAK (SPACER) ---
-    # Guna div style ini untuk menolak teks ke bawah sebanyak 25px supaya nampak luas dan tidak rapat dengan logo
+    # --- SPACER ---
     st.markdown("<div style='margin-bottom: 25px;'></div>", unsafe_allow_html=True)
     
     st.markdown("**<i class='fa-solid fa-circle-info'></i> Unit JLIP**", unsafe_allow_html=True)
     st.write("Chatbot FAQ Latihan Industri yang menyediakan maklumat dan menjawab pertanyaan berkaitan Latihan Industri berdasarkan Garis Panduan Latihan Industri UTHM.")
     
-    # Tukar hr lama kepada spacer kosong yang lebih 'clean'
     st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
     
     st.markdown("**Direktori Perhubungan**")
@@ -197,7 +195,7 @@ for message in st.session_state.messages:
 
 # --- 8. INPUT PENGGUNA & PEMPROSESAN RAG ---
 
-# PENTING: Pastikan baris ini ada untuk mengelakkan NameError
+# untuk mengelakkan NameError
 question_to_process = None 
 
 user_input = st.chat_input("Masukkan pertanyaan anda di sini...")
@@ -211,8 +209,8 @@ if question_to_process:
     # Simpan soalan user
     st.session_state.messages.append({"role": "user", "content": question_to_process, "time": time_now})
     
-    # Jalankan animasi spinner semasa memproses data RAG
-    with st.spinner("Unit JLIP sedang menyemak dokumen rasmi..."):
+    # animasi spinner semasa memproses data RAG
+    with st.spinner("Carian sedang dimuatkan..."):
         if db:
             try:
                 # Cari dokumen padanan dari FAISS
@@ -228,7 +226,7 @@ if question_to_process:
                 
                 full_prompt = f"Konteks Dokumen:\n{konteks_dokumen}\n\nSoalan Pelajar: {question_to_process}"
                 
-                # Jana jawapan AI
+                # jawapan AI
                 response = client.models.generate_content(
                     model='gemini-2.5-flash',
                     contents=full_prompt,
