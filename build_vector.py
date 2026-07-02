@@ -1,4 +1,3 @@
-# build_vector.py
 import os
 from pypdf import PdfReader
 from langchain_community.vectorstores import FAISS
@@ -14,7 +13,7 @@ def proses_pdf_ke_vector():
         print(f"❌ Error: Fail PDF '{pdf_path}' tidak dijumpai!")
         return
 
-    # Membaca fail menggunakan pypdf standard (Kalis bug Python 3.14)
+    # Membaca fail menggunakan pypdf standard 
     reader = PdfReader(pdf_path)
     documents = []
     
